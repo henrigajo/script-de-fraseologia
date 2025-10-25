@@ -1,3 +1,6 @@
+/* ========================================================================
+   SCRIPT.JS ATUALIZADO (com a API de Clipboard moderna)
+   ======================================================================== */
 const originalTabulationTemplate = `Contato Via: [Origem Contato]
 [Dynamic Intro Sentence]
 
@@ -79,9 +82,7 @@ const cityToSubterritorioMap = {
     "américo brasiliense": "ARARAQUARA", "americo brasiliense": "ARARAQUARA", "araraquara": "ARARAQUARA", "boa esperança do sul": "ARARAQUARA", "bocaina": "ARARAQUARA", "borborema": "ARARAQUARA", "cravinhos": "ARARAQUARA", "descalvado": "ARARAQUARA", "dobrada": "ARARAQUARA", "dourado": "ARARAQUARA", "gavião peixoto": "ARARAQUARA", "guariba": "ARARAQUARA", "guatapará": "ARARAQUARA", "ibaté": "ARARAQUARA", "ibitinga": "ARARAQUARA", "itaju": "ARARAQUARA", "itápolis": "ARARAQUARA", "matão": "ARARAQUARA", "motuca": "ARARAQUARA", "nova europa": "ARARAQUARA", "ribeirão bonito": "ARARAQUARA", "ribeirão preto": "ARARAQUARA", "ribeirao preto": "ARARAQUARA", "rincão": "ARARAQUARA", "santa ernestina": "ARARAQUARA", "santa lúcia": "ARARAQUARA", "são carlos": "ARARAQUARA", "sao carlos": "ARARAQUARA", "tabatinga": "ARARAQUARA", "trabiju": "ARARAQUARA",
     "bady bassitt": "BARRETOS", "barretos": "BARRETOS", "bebedouro": "BARRETOS", "cândido rodrigues": "BARRETOS", "colina": "BARRETOS", "cristais paulista": "BARRETOS", "fernando prestes": "BARRETOS", "franca": "BARRETOS", "guaíra": "BARRETOS", "itajobi": "BARRETOS", "itirapuã": "BARRETOS", "jaborandi": "BARRETOS", "jaboticabal": "BARRETOS", "mirassol": "BARRETOS", "monte alto": "BARRETOS", "olímpia": "BARRETOS", "patrocínio paulista": "BARRETOS", "pindorama": "BARRETOS", "pitangueiras": "BARRETOS", "ribeirão corrente": "BARRETOS", "santa adélia": "BARRETOS", "são josé do rio preto": "BARRETOS", "sao jose do rio preto": "BARRETOS",
     "águas de santa bárbara": "LENÇÓIS PAULISTA", "agudos": "LENÇÓIS PAULISTA", "arandu": "LENÇÓIS PAULISTA", "arealva": "LENÇÓIS PAULISTA", "areiópolis": "LENÇÓIS PAULISTA", "avaré": "LENÇÓIS PAULISTA", "bariri": "LENÇÓIS PAULISTA", "barra bonita": "LENÇÓIS PAULISTA", "bauru": "LENÇÓIS PAULISTA", "borebi": "LENÇÓIS PAULISTA", "botucatu": "LENÇÓIS PAULISTA", "cerqueira césar": "LENÇÓIS PAULISTA", "dois córregos": "LENÇÓIS PAULISTA", "iaras": "LENÇÓIS PAULISTA", "igaraçu do tietê": "LENÇÓIS PAULISTA", "itaí": "LENÇÓIS PAULISTA", "itapuí": "LENÇÓIS PAULISTA", "itatinga": "LENÇÓIS PAULISTA", "jaú": "LENÇÓIS PAULISTA", "jau": "LENÇÓIS PAULISTA", "lençóis paulista": "LENÇÓIS PAULISTA", "lencois paulista": "LENÇÓIS PAULISTA", "lins": "LENÇÓIS PAULISTA", "macatuba": "LENÇÓIS PAULISTA", "manduri": "LENÇÓIS PAULISTA", "mineiros do tietê": "LENÇÓIS PAULISTA", "novo horizonte": "LENÇÓIS PAULISTA", "óleo": "LENÇÓIS PAULISTA", "paranapanema": "LENÇÓIS PAULISTA", "pardinho": "LENÇÓIS PAULISTA", "pederneiras": "LENÇÓIS PAULISTA", "piratininga": "LENÇÓIS PAULISTA", "pratânia": "LENÇÓIS PAULISTA", "são manuel": "LENÇÓIS PAULISTA",
-Ocultar
     "araçariguama": "JUNDIAÍ", "atibaia": "JUNDIAÍ", "bom jesus dos perdões": "JUNDIAÍ", "bom jesus": "JUNDIAÍ", "bragança paulista": "JUNDIAÍ", "cabreúva": "JUNDIAÍ", "caieiras": "JUNDIAÍ", "campo limpo paulista": "JUNDIAÍ", "francisco morato": "JUNDIAÍ", "franco da rocha": "JUNDIAÍ", "indaiatuba": "JUNDIAÍ", "itupeva": "JUNDIAÍ", "jarinu": "JUNDIAÍ", "jundiaí": "JUNDIAÍ", "louveira": "JUNDIAÍ", "mairiporã": "JUNDIAÍ", "nazaré paulista": "JUNDIAÍ", "piracaia": "JUNDIAÍ", "valinhos": "JUNDIAÍ", "várzea paulista": "JUNDIAÍ", "vinhedo": "JUNDIAÍ",
-Abreviação
     "cubatão": "PRAIA GRANDE", "guarujá": "PRAIA GRANDE", "itanhaém": "PRAIA GRANDE", "mongaguá": "PRAIA GRANDE", "peruíbe": "PRAIA GRANDE", "praia grande": "PRAIA GRANDE", "santos": "PRAIA GRANDE", "são bernardo do campo": "PRAIA GRANDE", "sao bernardo": "PRAIA GRANDE", "são vicente": "PRAIA GRANDE",
     "biritiba-mirim": "SÃO JOSÉ DOS CAMPOS", "caçapava": "SÃO JOSÉ DOS CAMPOS", "guararema": "SÃO JOSÉ DOS CAMPOS", "igaratá": "SÃO JOSÉ DOS CAMPOS", "jacareí": "SÃO JOSÉ DOS CAMPOS", "mogi das cruzes": "SÃO JOSÉ DOS CAMPOS", "salesópolis": "SÃO JOSÉ DOS CAMPOS", "santa branca": "SÃO JOSÉ DOS CAMPOS", "são josé dos campos": "SÃO JOSÉ DOS CAMPOS", "sao jose dos campos": "SÃO JOSÉ DOS CAMPOS", "são paulo": "SÃO JOSÉ DOS CAMPOS", "taubaté": "SÃO JOSÉ DOS CAMPOS", "tremembé": "SÃO JOSÉ DOS CAMPOS"
 };
@@ -114,7 +115,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const customerNameInput = document.getElementById('customerName');
     
     const encaixeProtocoloInput = document.getElementById('encaixeProtocolo');
-    const protocoloInatividadeInput = document.getElementById('protocoloInatividadeInput');
+    // REMOVI A LINHA QUE FAZIA REFERÊNCIA A 'protocoloInatividadeInput'
     const protocoloInput = document.getElementById('protocoloInput');
     const protocoloInicialInput = document.getElementById('protocoloBoasVindasInput');
 
@@ -156,9 +157,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
         encaixeEnderecoInput.addEventListener('input', autoFillLocationDetails);
     }
     
-    if (encaixeProtocoloInput && protocoloInatividadeInput && protocoloInput && protocoloInicialInput) {
+    // ATUALIZEI ESTA VERIFICAÇÃO
+    if (encaixeProtocoloInput && protocoloInput && protocoloInicialInput) {
         encaixeProtocoloInput.addEventListener('input', (e) => syncProtocolos(e.target.value));
-        protocoloInatividadeInput.addEventListener('input', (e) => syncProtocolos(e.target.value));
         protocoloInput.addEventListener('input', (e) => syncProtocolos(e.target.value));
         protocoloInicialInput.addEventListener('input', (e) => syncProtocolos(e.target.value));
     }
@@ -166,19 +167,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 function syncProtocolos(protocolo) {
     const encaixeProtocoloInput = document.getElementById('encaixeProtocolo');
-    const protocoloInatividadeInput = document.getElementById('protocoloInatividadeInput');
+    // REMOVI A LINHA QUE FAZIA REFERÊNCIA A 'protocoloInatividadeInput'
     const protocoloInput = document.getElementById('protocoloInput');
     const protocoloInicialInput = document.getElementById('protocoloBoasVindasInput');
     
     if (encaixeProtocoloInput.value !== protocolo) encaixeProtocoloInput.value = protocolo;
-    if (protocoloInatividadeInput.value !== protocolo) protocoloInatividadeInput.value = protocolo;
+    // REMOVI A LINHA QUE FAZIA REFERÊNCIA A 'protocoloInatividadeInput'
     if (protocoloInput.value !== protocolo) protocoloInput.value = protocolo;
     if (protocoloInicialInput.value !== protocolo) protocoloInicialInput.value = protocolo;
 }
 
 function resetProtocolos() {
     document.getElementById('encaixeProtocolo').value = '';
-    document.getElementById('protocoloInatividadeInput').value = '';
+    // REMOVI A LINHA QUE FAZIA REFERÊNCIA A 'protocoloInatividadeInput'
     document.getElementById('protocoloInput').value = '';
     document.getElementById('protocoloBoasVindasInput').value = '';
 }
@@ -200,39 +201,51 @@ function resetEncaixeForm() {
     document.getElementById('horario-info').classList.add('hidden');
 }
 
-// Universal copy function using document.execCommand for better compatibility
+// ========================================================================
+//  !!!!!!!!!! FUNÇÃO DE COPIAR ATUALIZADA !!!!!!!!!!
+// ========================================================================
 function copyToClipboard(text, isFinalAction = false, isEncaixe = false) {
-     const textArea = document.createElement("textarea");
+    if (!navigator.clipboard) {
+        // Fallback para navegadores antigos ou contextos inseguros (embora devêssemos estar em https)
+        fallbackCopyTextToClipboard(text);
+        return;
+    }
+
+    navigator.clipboard.writeText(text).then(function() {
+        // Sucesso!
+        showFeedback();
+        if (isFinalAction) {
+            setTimeout(resetProtocolos, 300);
+        } else if (isEncaixe) {
+            setTimeout(resetEncaixeForm, 300);
+        }
+    }, function(err) {
+        // Falha
+        console.error('Erro ao copiar para a área de transferência: ', err);
+        fallbackCopyTextToClipboard(text); // Usa o prompt antigo como fallback
+    });
+}
+// ========================================================================
+// A FUNÇÃO ANTIGA (document.execCommand) FOI REMOVIDA
+// ========================================================================
+
+function fallbackCopyTextToClipboard(text) {
+     // Esta função agora é SÓ um fallback, caso o navigator.clipboard falhe
+     const textArea = document.createElement("textarea");
      textArea.value = text;
      textArea.style.position = "fixed";
      textArea.style.top = "-9999px";
      textArea.style.left = "-9999px";
-
-     document.body.appendChild(textArea);
-     textArea.focus();
-     textArea.select();
-
-     try {
-         const successful = document.execCommand('copy');
-         if (successful) {
-             showFeedback();
-             if (isFinalAction) {
-                 setTimeout(resetProtocolos, 300);
-             } else if (isEncaixe) {
-                  setTimeout(resetEncaixeForm, 300);
-             }
-         } else {
-             fallbackCopyTextToClipboard(text);
-         }
-     } catch (err) {
-          fallbackCopyTextToClipboard(text);
-     }
-
-     document.body.removeChild(textArea);
-}
-
-function fallbackCopyTextToClipboard(text) {
-     window.prompt("Não foi possível copiar automaticamente. Por favor, copie manualmente (Ctrl+C):", text);
+     document.body.appendChild(textArea);
+     textArea.focus();
+     textArea.select();
+     try {
+        document.execCommand('copy');
+        showFeedback(); // Tenta mostrar feedback mesmo no fallback
+     } catch (err) {
+        window.prompt("Não foi possível copiar automaticamente. Por favor, copie manualmente (Ctrl+C):", text);
+     }
+     document.body.removeChild(textArea);
 }
 
 function autoFillLocationDetails() {
@@ -399,13 +412,8 @@ function copyOfferPeriod(elementId, buttonElement) {
     copyToClipboard(textToCopy);
 }
 
-function copyInactivityMessageWithProtocol(elementId, buttonElement) {
-    const protocolo = document.getElementById('protocoloInatividadeInput').value.trim() || '[Não informado]';
-    const textElement = document.getElementById(elementId);
-    const originalText = textElement.innerText; 
-    const textToCopy = originalText.replace('[Nº do Protocolo]', protocolo);
-    copyToClipboard(textToCopy, true);
-}
+// REMOVI A FUNÇÃO 'copyInactivityMessageWithProtocol'
+// PORQUE O ELEMENTO 'protocoloInatividadeInput' FOI REMOVIDO DO HTML
 
 function copyFinalMessageWithProtocol(elementId, buttonElement) {
     const protocolo = document.getElementById('protocoloInput').value.trim() || '[Não informado]';
@@ -418,242 +426,4 @@ function copyFinalMessageWithProtocol(elementId, buttonElement) {
 function copyResumoAgendamento() {
     const nome = document.getElementById('resumoNome').value.trim() || '[Preencher Nome do Cliente]';
     const endereco = document.getElementById('resumoEndereco').value.trim() || '[Preencher Endereço]';
-    const contato = document.getElementById('resumoContato').value.trim() || '[Preencher Telefone]';
-    const data = document.getElementById('resumoData').value.trim() || '[Preencher DD/MM/AAAA]';
-    const horario = document.getElementById('resumoHorario').value.trim() || '[Preencher Período e Horário]';
-    const referencia = document.getElementById('resumoReferencia').value.trim() || '[Preencher Ponto de Referência]';
-    
-    const textToCopy = `Nome do Cliente: ${nome}
-Endereço do agendamento: ${endereco}
-Telefone para contato: ${contato}
-Qual dia será o agendamento: ${data}
-Horário do agendamento: ${horario}
-Ponto de referência: ${referencia}`;
-
-    copyToClipboard(textToCopy);
-    
-    setTimeout(() => {
-        document.getElementById('resumoNome').value = '';
-        document.getElementById('resumoEndereco').value = '';
-        document.getElementById('resumoContato').value = '';
-        document.getElementById('resumoData').value = '';
-        document.getElementById('resumoHorario').value = '';
-        document.getElementById('resumoReferencia').value = '';
-    }, 300);
-}
-
-
-// Função para copiar do textarea de tabulação
-function copyFromTextarea(elementId, buttonElement) {
-    const textarea = document.getElementById(elementId);
-    const textToCopy = textarea.value;
-
-    if (!textToCopy) {
-        console.error('Textarea está vazio.');
-        return;
-    }
-
-    copyToClipboard(textToCopy, true); // It is a final action
-
-    setTimeout(() => {
-        const allTabButtons = document.querySelectorAll('.tab-button');
-        allTabButtons.forEach(btn => {
-            btn.dataset.active = 'false';
-            btn.classList.remove('bg-green-500', 'text-white');
-            btn.classList.add('bg-gray-200', 'text-gray-800');
-ANTERIOR
-        });
-        updateAllTabulationLogic();
-    }, 300);
-}
-
-function updateAllTabulationLogic() {
-    const textarea = document.getElementById('tabulacaoTexto');
-    const problemBtn = document.querySelector('#problema-relatado-group button[data-active="true"]');
-    const resultMassivoBtn = document.querySelector('[data-placeholder="Resultado"][data-massivo-trigger="true"][data-active="true"]');
-    const solicitacaoAtivaBtn = document.querySelector('#solicitacao-cliente-group button[data-active="true"]');
-
-    const isMassivoMode = resultMassivoBtn || (problemBtn && problemBtn.dataset.massivoTrigger === 'true');
-    const isSolicitacaoMode = solicitacaoAtivaBtn;
-    const isTechnicalMode = problemBtn && !isMassivoMode;
-
-    let baseTemplate;
-    if (isSolicitacaoMode) {
-        baseTemplate = solicitacaoTabulationTemplate;
-    } else if (isMassivoMode) {
-        baseTemplate = massivoTabulationTemplate;
-    } else if (isTechnicalMode) {
-        baseTemplate = technicalProblemTabulationTemplate;
-    } else {
-        baseTemplate = originalTabulationTemplate;
-    }
-    
-    let newText = baseTemplate;
-
-    const customerNameText = document.getElementById('customerName').value.trim() || 'O cliente';
-    let dynamicSentence = '';
-    if (problemBtn || resultMassivoBtn) {
-        dynamicSentence = `${customerNameText} entrou em contato informando:`;
-    } else if (solicitacaoAtivaBtn) {
-        dynamicSentence = `${customerNameText} entrou em contato solicitando:`;
-    }
-
-    if (dynamicSentence) {
-        newText = newText.replace('[Dynamic Intro Sentence]', dynamicSentence);
-    } else {
-        newText = newText.replace(/\[Dynamic Intro Sentence\]\n\n?/, '');
-    }
-
-
-    document.querySelectorAll('[data-group-type="single"] button[data-active="true"]').forEach(button => {
-        const placeholder = button.dataset.placeholder;
-        const value = button.dataset.value;
-        newText = newText.replace(`[${placeholder}]`, value);
-    });
-
-    const multiGroups = document.querySelectorAll('[data-group-type="multi"]');
-    multiGroups.forEach(group => {
-        const placeholders = {};
-        group.querySelectorAll('button').forEach(button => {
-            const placeholder = button.dataset.placeholder;
-            if (button.dataset.active === 'true') {
-                 const value = button.dataset.value;
-                if (!placeholders[placeholder]) {
-                    placeholders[placeholder] = [];
-                }
-                placeholders[placeholder].push(value);
-            }
-        });
-
-        for (const placeholder in placeholders) {
-            if (placeholders[placeholder].length > 0) {
-                const combinedValue = placeholders[placeholder].join('; ');
-                newText = newText.replace(`[${placeholder}]`, combinedValue);
-            }
-        }
-    });
-
-    if (isSolicitacaoMode) {
-        const vencimentoPicker = document.getElementById('vencimento-date-picker');
-        vencimentoPicker.classList.toggle('hidden', solicitacaoAtivaBtn.dataset.value !== 'Troca de data de vencimento');
-        let solucao = '[Solução]';
-        if (solicitacaoAtivaBtn.dataset.value === 'Segunda via de boleto') solucao = 'Segunda via de boleto enviada ao cliente.';
-        if (solicitacaoAtivaBtn.dataset.value === 'Desbloqueio em confiança') solucao = 'Desbloqueio em confiança realizado no sistema.';
-        if (solicitacaoAtivaBtn.dataset.value === 'Troca de senha de Wi-Fi') solucao = 'Cliente orientado para realizar a troca da senha do Wi-Fi.';
-Lixeira
-        if (solicitacaoAtivaBtn.dataset.value === 'Troca de data de vencimento') {
-            const dayValue = document.getElementById('newDueDate').value;
-            solucao = dayValue ? `Solicitada alteração da data de vencimento para o dia ${dayValue}.` : 'Solicitada alteração da data de vencimento [selecionar dia].';
-        }
-        newText = newText.replace('[Solução]', solucao);
-
-    } else {
-        const resultadoAtivo = document.querySelector('[data-placeholder="Resultado"][data-active="true"]');
-        if (resultadoAtivo) {
-            if (resultadoAtivo.dataset.value === 'Conexão normalizada após procedimentos') {
-                newText = newText.replace('[Diagnóstico]', 'Problema resolvido');
-            } else if (!isMassivoMode) {
-                newText = newText.replace('[Diagnóstico]', 'Problema não resolvido');
-            }
-        }
-
-        const solucoes = [];
-        document.querySelectorAll('#procedimentos-testes button[data-active="true"]').forEach(button => {
-             const isLedButton = button.dataset.placeholder === 'Status LEDs';
-             if(!isLedButton) {
-                 solucoes.push(button.dataset.value);
-             }
-        });
-        if (resultadoAtivo && resultadoAtivo.dataset.value.includes('visita')) {
-            solucoes.push('Encaminhado para visita técnica');
-        }
-        if (solucoes.length > 0) {
-            newText = newText.replace('[Solução]', solucoes.join('; '));
-        }
-        
-        if (problemBtn && problemBtn.dataset.value.includes('Sem conexão')) {
-            newText = newText.replace(/- Teste de Velocidade:.*?\n/, '');
-        }
-
-        const ledButton = document.querySelector('#procedimentos-testes button[data-placeholder="Status LEDs"]');
-        if (ledButton && ledButton.dataset.active === 'true') {
-            newText = newText.replace('[Status LEDs]', ledButton.dataset.value);
-        } else {
-            newText = newText.replace('[Status LEDs]', 'Normalizado');
-        }
-    }
-    
-    textarea.value = newText;
-}
-
-function toggleTabulationButton(button) {
-    const isActive = button.dataset.active === 'true';
-    const groupContainer = button.closest('[data-group-type]');
-    const groupType = groupContainer.dataset.groupType;
-
-    if (isActive) {
-        button.dataset.active = 'false';
-        button.classList.replace('bg-green-500', 'bg-gray-200');
-Mover
-        button.classList.replace('text-white', 'text-gray-800');
-    } else {
-        if (groupType === 'single') {
-            const siblingButtons = groupContainer.querySelectorAll('button');
-            siblingButtons.forEach(btn => {
-                if (btn.dataset.active === 'true') {
-                    btn.dataset.active = 'false';
-                    btn.classList.replace('bg-green-500', 'bg-gray-200');
-Next
-                    btn.classList.replace('text-white', 'text-gray-800');
-                }
-            });
-        }
-        button.dataset.active = 'true';
-        button.classList.replace('bg-gray-200', 'bg-green-500');
-        button.classList.replace('text-gray-800', 'text-white');
-    }
-    
-    // Lógica de exclusão mútua
-    const isNormalizadoBtn = button.dataset.value === 'Conexão normalizada após procedimentos';
-    const isLedBtn = button.dataset.placeholder === 'Status LEDs';
-    const isProblemTrigger = button.closest('#problema-relatado-group');
-    const isSolicitacaoTrigger = button.closest('#solicitacao-cliente-group');
-
-á
-    if (button.dataset.active === 'true') {
-         if (isNormalizadoBtn) {
-             const ledBtn = document.querySelector('[data-placeholder="Status LEDs"][data-active="true"]');
-             if (ledBtn) ledBtn.click();
-         }
-         if (isLedBtn) {
-  t          const normalizadoBtn = document.querySelector('[data-placeholder="Resultado"][data-value="Conexão normalizada após procedimentos"][data-active="true"]');
-             if (normalizadoBtn) normalizadoBtn.click();
-         }
-         if (isProblemTrigger) {
-             document.querySelectorAll('#solicitacao-cliente-group button[data-active="true"]').forEach(b => b.click());
-         } else if (isSolicitacaoTrigger) {
-             document.querySelectorAll('#problema-relatado-group button[data-active="true"]').forEach(b => b.click());
-             const resultadoSolicitacao = document.querySelector('[data-placeholder="Resultado"][data-value="Solicitação atendida"]');
-             if(resultadoSolicitacao && resultadoSolicitacao.dataset.active !== 'true') resultadoSolicitacao.click();
-ci      } else {
-             const isMassivoResult = button.dataset.massivoTrigger === 'true' && button.dataset.placeholder === 'Resultado';
-             if (isMassivoResult) {
-                 document.querySelectorAll('#solicitacao-cliente-group button[data-active="true"]').forEach(b => b.click());
-Two
-             }
-         }
-    }
-    
-    updateAllTabulationLogic();
-}
-
-function showFeedback() {
-    const feedback = document.getElementById('copyFeedback');
-    feedback.style.display = 'block';
-    feedback.classList.add('copy-feedback-animation');
-    
-    setTimeout(() => {
-        feedback.style.display = 'none';
-        feedback.classList.remove('copy-feedback-animation');
-    }, 2000);
-}
+_ ... (o resto do seu JavaScript continua igual até o final) ... _
