@@ -1,234 +1,476 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Script de Atendimento v2 - Suporte Técnico</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script de Atendimento v2 - Suporte Técnico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
-        <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Script de Atendimento</h1>
-            <p class="text-gray-600 mt-2">Suporte Técnico via Chat - Desktop</p>
-        </header>
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold text-blue-700">Script de Atendimento</h1>
+            <p class="text-gray-600 mt-2">Suporte Técnico via Chat - Desktop</p>
+        </header>
 
-                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 sticky top-4 z-10 shadow-sm">
-            <div class="flex flex-col sm:flex-row gap-4">
-                <div class="flex-1">
-                    <label for="agentName" class="block text-lg font-semibold text-blue-800 mb-2">Seu Nome:</label>
-                    <input type="text" id="agentName" placeholder="Digite seu nome aqui" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                </div>
-                <div class="flex-1">
-                    <label for="customerName" class="block text-lg font-semibold text-blue-800 mb-2">Nome do Cliente:</label>
-                    <input type="text" id="customerName" placeholder="Digite o nome do cliente" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                </div>
-            </div>
-            <p class="text-xs text-gray-500 mt-2">O campo "Seu Nome" será inserido automaticamente nas mensagens onde houver a marcação `[Seu Nome]`.</p>
-        </div>
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8 sticky top-4 z-10 shadow-sm">
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="flex-1">
+                    <label for="agentName" class="block text-lg font-semibold text-blue-800 mb-2">Seu Nome:</label>
+                    <input type="text" id="agentName" placeholder="Digite seu nome aqui" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+                <div class="flex-1">
+                    <label for="customerName" class="block text-lg font-semibold text-blue-800 mb-2">Nome do Cliente:</label>
+                    <input type="text" id="customerName" placeholder="Digite o nome do cliente" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-2">O campo "Seu Nome" será inserido automaticamente nas mensagens onde houver a marcação `[Seu Nome]`.</p>
+        </div>
 
-                <div class="space-y-8">
+        <div class="space-y-8">
 
-                        <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">👋 Saudações e Início</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Saudação Inicial</h3>
-                        <pre id="msg1" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Olá, tudo bem? 😊 Meu nome é [Seu Nome] e darei sequência ao seu atendimento. Por gentileza, com quem eu falo?</pre>
-                        <button onclick="copyText('msg1', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Boas-vindas e Protocolo</h3>
-                        <div class="mb-3">
-                            <label for="protocoloBoasVindasInput" class="block text-sm font-medium text-gray-700 mb-1">Protocolo do Atendimento:</label>
-                            <input type="text" id="protocoloBoasVindasInput" placeholder="Insira o nº do protocolo aqui" class="w-full sm:w-2/3 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition">
-                        </div>
-                        <pre id="msgWelcome" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Seja bem vindo ao setor de suporte técnico, [Nome do Cliente]! 🎉 Antes de prosseguir, segue o número do protocolo do nosso atendimento: 📝 [Nº do Protocolo]</pre>
-                        <button onclick="copyWelcomeMessageWithProtocol('msgWelcome', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Pergunta Padrão (Após Protocolo)</h3>
-                        <pre id="msgHelp" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Em que posso ajudar? 🤔</pre>
-                        <button onclick="copyText('msgHelp', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                </div>
-            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">👋 Saudações e Início</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Saudação Inicial</h3>
+                        <pre id="msg1" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Olá, tudo bem? 😊 Meu nome é [Seu Nome] e darei sequência ao seu atendimento. Por gentileza, com quem eu falo?</pre>
+                        <button onclick="copyText('msg1', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Boas-vindas e Protocolo</h3>
+                        <div class="mb-3">
+                            <label for="protocoloBoasVindasInput" class="block text-sm font-medium text-gray-700 mb-1">Protocolo do Atendimento:</label>
+                            <input type="text" id="protocoloBoasVindasInput" placeholder="Insira o nº do protocolo aqui" class="w-full sm:w-2/3 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition">
+                        </div>
+                        <pre id="msgWelcome" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Seja bem vindo ao setor de suporte técnico, [Nome do Cliente]! 🎉 Antes de prosseguir, segue o número do protocolo do nosso atendimento: 📝 [Nº do Protocolo]</pre>
+                        <button onclick="copyWelcomeMessageWithProtocol('msgWelcome', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Pergunta Padrão (Após Protocolo)</h3>
+                        <pre id="msgHelp" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Em que posso ajudar? 🤔</pre>
+                        <button onclick="copyText('msgHelp', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                </div>
+            </div>
 
-                        <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">🔍 Diagnóstico do Problema</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Instabilidade Massiva na Região</h3>
-                        <pre id="msgMassivoTemplate" class="hidden">Obrigado por aguardar. Verifiquei em nosso sistema e, no momento, estamos com uma instabilidade massiva que está afetando a sua região. 📡 Por este motivo, você está sem conexão. Nossa equipe técnica já está ciente e trabalhando com prioridade para normalizar o serviço o mais rápido possível. A previsão para normalização é de até [horas] horas. Peço desculpas pelo transtorno e agradecemos a sua compreensão. 🙏</pre>
-                        <p class="text-sm text-gray-600 mb-3">Selecione o prazo de retorno para incluir na mensagem:</p>
-                        <div class="flex flex-wrap gap-4">
-                            <button onclick="copyMassivoMessage(12)" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">Copiar com Previsão de 12h</button>
-                            <button onclick="copyMassivoMessage(24)" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">Copiar com Previsão de 24h</button>
-                        </div>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Sem Conexão</h3>
-                        <pre id="msg3" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendido. Para eu analisar, você poderia verificar as luzes do seu modem/roteador? 🤔 Por favor, me diga quais luzes estão acesas e de que cor elas são (por exemplo: Power, PON/LOS, Wi-Fi, LAN). 💡</pre>
-                        <button onclick="copyText('msg3', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Lentidão na Internet</h3>
-                        <pre id="msg4" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Compreendo que sua conexão está lenta. 🐢 Para investigarmos, o ideal é realizar um teste de velocidade (sugerimos o site speedtest.net) em um computador conectado via cabo de rede. Caso não seja possível, você pode realizar o teste pelo celular, conectado à rede Wi-Fi 5G e o mais próximo possível do roteador. Por favor, me envie o resultado do teste. 📊</pre>
-                        <button onclick="copyText('msg4', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Velocidade Conforme ANATEL</h3>
-                        <pre id="msg4b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Fiz as verificações e sua conexão está dentro do que é exigido pela ANATEL, conforme a Resolução nº 574/2011. ✅
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">🔍 Diagnóstico do Problema</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Instabilidade Massiva na Região</h3>
+                        <pre id="msgMassivoTemplate" class="hidden">Obrigado por aguardar. Verifiquei em nosso sistema e, no momento, estamos com uma instabilidade massiva que está afetando a sua região. 📡 Por este motivo, você está sem conexão. Nossa equipe técnica já está ciente e trabalhando com prioridade para normalizar o serviço o mais rápido possível. A previsão para normalização é de até [horas] horas. Peço desculpas pelo transtorno e agradecemos a sua compreensão. 🙏</pre>
+                        <p class="text-sm text-gray-600 mb-3">Selecione o prazo de retorno para incluir na mensagem:</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="copyMassivoMessage(12)" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">Copiar com Previsão de 12h</button>
+                            <button onclick="copyMassivoMessage(24)" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">Copiar com Previsão de 24h</button>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Sem Conexão</h3>
+                        <pre id="msg3" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendido. Para eu analisar, você poderia verificar as luzes do seu modem/roteador? 🤔 Por favor, me diga quais luzes estão acesas e de que cor elas são (por exemplo: Power, PON/LOS, Wi-Fi, LAN). 💡</pre>
+                        <button onclick="copyText('msg3', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Lentidão na Internet</h3>
+                        <pre id="msg4" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Compreendo que sua conexão está lenta. 🐢 Para investigarmos, o ideal é realizar um teste de velocidade (sugerimos o site speedtest.net) em um computador conectado via cabo de rede. Caso não seja possível, você pode realizar o teste pelo celular, conectado à rede Wi-Fi 5G e o mais próximo possível do roteador. Por favor, me envie o resultado do teste. 📊</pre>
+                        <button onclick="copyText('msg4', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Velocidade Conforme ANATEL</h3>
+                        <pre id="msg4b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Fiz as verificações e sua conexão está dentro do que é exigido pela ANATEL, conforme a Resolução nº 574/2011. ✅
 
 Essa norma determina que a operadora deve entregar:
 - Pelo menos 80% da velocidade contratada na média mensal;
 - E pelo menos 40% da velocidade contratada em testes pontuais.
 
 Entendo que a navegação possa parecer lenta em alguns momentos, o que pode estar ligado a outros fatores como muitos aparelhos conectados, uso intenso da rede (streaming, jogos, etc.), ou interferência no sinal Wi-Fi.</pre>
-                        <button onclick="copyText('msg4b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Problemas com o Wi-Fi</h3>
-                        <pre id="msg5" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendo. O problema de lentidão ou queda acontece em todos os aparelhos conectados ao Wi-Fi ou em apenas um específico? 📶 A conexão via cabo de rede, se possível testar, funciona normalmente?</pre>
-                        <button onclick="copyText('msg5', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                </div>
-            </div>
+                        <button onclick="copyText('msg4b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Problemas com o Wi-Fi</h3>
+                        <pre id="msg5" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendo. O problema de lentidão ou queda acontece em todos os aparelhos conectados ao Wi-Fi ou em apenas um específico? 📶 A conexão via cabo de rede, se possível testar, funciona normalmente?</pre>
+                        <button onclick="copyText('msg5', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                </div>
+            </div>
 
-                         <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⏳ Mensagens de Espera e Verificação</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Verificando Informações</h3>
-                        <pre id="msgCheckingInfo" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendi, só um momento enquanto verifico algumas informações em sistema. 🔍</pre>
-                        <button onclick="copyText('msgCheckingInfo', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Verificação Remota</h3>
-                        <pre id="msg6" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado pelas informações. Estou iniciando uma verificação remota na sua conexão agora. 💻 Peço que aguarde um momento, por favor.</pre>
-                        <button onclick="copyText('msg6', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Aguarde um Momento</h3>
-                        <pre id="msg7" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Só mais um momento, por favor. Estou finalizando os testes no sistema. ⏳</pre>
-                        <button onclick="copyText('msg7', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                </div>
-            </div>
+             <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⏳ Mensagens de Espera e Verificação</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Verificando Informações</h3>
+                        <pre id="msgCheckingInfo" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Entendi, só um momento enquanto verifico algumas informações em sistema. 🔍</pre>
+                        <button onclick="copyText('msgCheckingInfo', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Verificação Remota</h3>
+                        <pre id="msg6" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado pelas informações. Estou iniciando uma verificação remota na sua conexão agora. 💻 Peço que aguarde um momento, por favor.</pre>
+                        <button onclick="copyText('msg6', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Aguarde um Momento</h3>
+                        <pre id="msg7" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Só mais um momento, por favor. Estou finalizando os testes no sistema. ⏳</pre>
+                        <button onclick="copyText('msg7', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                </div>
+            </div>
 
-                        <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⏱️ Mensagens de Inatividade</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 5 Minutos</h3>
-                        <pre id="msgInactive5" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">👋 Ainda está por aí? Só passando para confirmar se recebeu minha última mensagem. Estou à disposição para te ajudar!</pre>
-                        <button onclick="copyText('msgInactive5', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 10 Minutos</h3>
-                        <pre id="msgInactive10" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">🙂 Continuo por aqui caso precise de algum suporte. Caso não consiga responder agora, tudo bem, mas acho importante te dizer que, após 10 minutos sem interação, este atendimento será encerrado.</pre>
-                        <button onclick="copyText('msgInactive10', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 15 Minutos</h3>
-                        <pre id="msgInactive15" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">🔔 Último lembrete: continuo à disposição, mas se não houver interação, o chat será encerrado em 5 minutos.</pre>
-                        <button onclick="copyText('msgInactive15', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Encerramento por Inatividade (20 Minutos)</h3>
-                        <pre id="msgInactiveFinal" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">⚡ Como não tivemos interação, vou encerrar este atendimento. Qualquer necessidade, pode contar com a Desktop em nossos canais oficiais. Até breve!</pre>
-                        <button onclick="copyText('msgInactiveFinal', this)" class="mt-3 bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 w-full sm:w-auto">Copiar Encerramento</button>
-                    </div>
-                </div>
-            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⏱️ Mensagens de Inatividade</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 5 Minutos</h3>
+                        <pre id="msgInactive5" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">👋 Ainda está por aí? Só passando para confirmar se recebeu minha última mensagem. Estou à disposição para te ajudar!</pre>
+                        <button onclick="copyText('msgInactive5', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 10 Minutos</h3>
+                        <pre id="msgInactive10" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">🙂 Continuo por aqui caso precise de algum suporte. Caso não consiga responder agora, tudo bem, mas acho importante te dizer que, após 10 minutos sem interação, este atendimento será encerrado.</pre>
+                        <button onclick="copyText('msgInactive10', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Inatividade - 15 Minutos</h3>
+                        <pre id="msgInactive15" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">🔔 Último lembrete: continuo à disposição, mas se não houver interação, o chat será encerrado em 5 minutos.</pre>
+                        <button onclick="copyText('msgInactive15', this)" class="mt-3 bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Encerramento por Inatividade (20 Minutos)</h3>
+                        <pre id="msgInactiveFinal" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">⚡ Como não tivemos interação, vou encerrar este atendimento. Qualquer necessidade, pode contar com a Desktop em nossos canais oficiais. Até breve!</pre>
+                        <button onclick="copyText('msgInactiveFinal', this)" class="mt-3 bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 w-full sm:w-auto">Copiar Encerramento</button>
+                    </div>
+                </div>
+            </div>
 
-                        <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⚙️ Procedimentos Padrão</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Reforço de Sinal (Passo 1: Desligar)</h3>
-                        <pre id="msg8" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado pelas informações. Vou fazer um reforço de sinal na sua conexão e, para isso, preciso que retire seu equipamento da tomada para não correr o risco de danificá-lo. 🔌 Por favor, me avise assim que tiver desligado.</pre>
-                        <button onclick="copyText('msg8', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Reforço de Sinal (Passo 2: Religar)</h3>
-                        <pre id="msg8b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Ok, obrigado por confirmar. 👍 Por favor, aguarde 40 segundos com ele desligado e depois pode ligá-lo novamente na tomada. A conexão deve se restabelecer em 3 a 5 minutos. Me avise, por favor, assim que as luzes se estabilizarem.</pre>
-                        <button onclick="copyText('msg8b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Verificação de Cabos</h3>
-                        <pre id="msg9" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Por favor, verifique se todos os cabos estão bem conectados e firmes, tanto no equipamento quanto na tomada. 🔗 É importante garantir que não há nenhum cabo solto ou com mau contato.</pre>
-                        <button onclick="copyText('msg9', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Teste com Cabo de Rede</h3>
-                        <pre id="msg10" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Para eu ter certeza de que o problema não está na rede Wi-Fi, você conseguiria conectar um computador ou notebook diretamente ao roteador com um cabo de rede e verificar se a internet funciona? 💻</pre>
-                        <button onclick="copyText('msg10', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                </div>
-            </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">⚙️ Procedimentos Padrão</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Reforço de Sinal (Passo 1: Desligar)</h3>
+                        <pre id="msg8" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado pelas informações. Vou fazer um reforço de sinal na sua conexão e, para isso, preciso que retire seu equipamento da tomada para não correr o risco de danificá-lo. 🔌 Por favor, me avise assim que tiver desligado.</pre>
+                        <button onclick="copyText('msg8', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                     <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Reforço de Sinal (Passo 2: Religar)</h3>
+                        <pre id="msg8b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Ok, obrigado por confirmar. 👍 Por favor, aguarde 40 segundos com ele desligado e depois pode ligá-lo novamente na tomada. A conexão deve se restabelecer em 3 a 5 minutos. Me avise, por favor, assim que as luzes se estabilizarem.</pre>
+                        <button onclick="copyText('msg8b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Verificação de Cabos</h3>
+                        <pre id="msg9" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Por favor, verifique se todos os cabos estão bem conectados e firmes, tanto no equipamento quanto na tomada. 🔗 É importante garantir que não há nenhum cabo solto ou com mau contato.</pre>
+                        <button onclick="copyText('msg9', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Teste com Cabo de Rede</h3>
+                        <pre id="msg10" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Para eu ter certeza de que o problema não está na rede Wi-Fi, você conseguiria conectar um computador ou notebook diretamente ao roteador com um cabo de rede e verificar se a internet funciona? 💻</pre>
+                        <button onclick="copyText('msg10', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                </div>
+            </div>
 
-                         <div>
-                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">🏁 Encaminhamento e Encerramento</h2>
-                <div class="space-y-4">
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Necessidade de Visita Técnica</h3>
-                        <pre id="msg11" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado por realizar todos os testes. Com base nas verificações que fiz por aqui, identifiquei que será necessária a visita de um técnico para resolver o problema em seu endereço. 👨‍🔧 Podemos prosseguir com o agendamento?</pre>
-                        <button onclick="copyText('msg11', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
-                    
-                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Coleta de Informações para Visita</h3>
-                        <pre id="msg11b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Excelente! 👍 Para prosseguir com o agendamento, por favor, me confirme um telefone de contato atualizado (com DDD) e um ponto de referência para auxiliar o técnico a localizar o endereço. 📱🗺️</pre>
-                        <button onclick="copyText('msg11b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
-                    </div>
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">🏁 Encaminhamento e Encerramento</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Necessidade de Visita Técnica</h3>
+                        <pre id="msg11" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Obrigado por realizar todos os testes. Com base nas verificações que fiz por aqui, identifiquei que será necessária a visita de um técnico para resolver o problema em seu endereço. 👨‍🔧 Podemos prosseguir com o agendamento?</pre>
+                        <button onclick="copyText('msg11', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Coleta de Informações para Visita</h3>
+                        <pre id="msg11b" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Excelente! 👍 Para prosseguir com o agendamento, por favor, me confirme um telefone de contato atualizado (com DDD) e um ponto de referência para auxiliar o técnico a localizar o endereço. 📱🗺️</pre>
+                        <button onclick="copyText('msg11b', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
 
-                                        <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
-                        <h3 class="font-semibold text-gray-800 mb-2">Encaixe de Visita Técnica (Solicitação Interna)</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label for="encaixeCaso" class="block text-sm font-medium text-gray-700">Caso:</label>
-                                <input type="text" id="encaixeCaso" placeholder="Nº do caso ou ID do cliente" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-                            </div>
-                            <div>
-                                <label for="encaixeProtocolo" class="block text-sm font-medium text-gray-700">Protocolo:</label>
-                                <input type="text" id="encaixeProtocolo" placeholder="Nº do protocolo de atendimento" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-                            </div>
-                            <div>
-                                <label for="encaixeEndereco" class="block text-sm font-medium text-gray-700">Endereço:</label>
-                                <input type="text" id="encaixeEndereco" placeholder="Endereço completo do cliente" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="encaixeCluster" class="block text-sm font-medium text-gray-700">Cluster:</label>
-                                    <input type="text" id="encaixeCluster" placeholder="Preenchido automaticamente" class="mt-1 w-full p-2 border border-gray-300 rounded-md bg-gray-50" readonly>
-                                </div>
-                                <div>
-                                    <label for="encaixeSubterritorio" class="block text-sm font-medium text-gray-700">Subterritório:</label>
-                                    <input type="text" id="encaixeSubterritorio" placeholder="Preenchido automaticamente" class="mt-1 w-full p-2 border border-gray-300 rounded-md bg-gray-50" readonly>
-                                </div>
-                            </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="encaixeData" class="block text-sm font-medium text-gray-700">Data do Encaixe:</label>
-                                    <input type="date" id="encaixeData" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-                                </div>
-                                <div>
-                                    <label for="encaixePeriodo" class="block text-sm font-medium text-gray-700">Período:</label>
-                                    <select id="encaixePeriodo" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-                                        <option value="">Selecione...</option>
-                                        <option value="Manhã">Manhã (07:00 às 13:00)</option>
-                                        <option value="Tarde">Tarde (13:00 às 19:00)</option>
-                                        <option value="Noite">Noite (19:00 às 22:00)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="encaixeContato" class="block text-sm font-medium text-gray-700">Contato:</label>
-                                <input type="text" id="encaixeContato" placeholder="Telefone principal para contato" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
-            _ ... (conteúdo HTML continua) ... _
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Encaixe de Visita Técnica (Solicitação Interna)</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label for="encaixeCaso" class="block text-sm font-medium text-gray-700">Caso:</label>
+                                <input type="text" id="encaixeCaso" placeholder="Nº do caso ou ID do cliente" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="encaixeProtocolo" class="block text-sm font-medium text-gray-700">Protocolo:</label>
+                                <input type="text" id="encaixeProtocolo" placeholder="Nº do protocolo de atendimento" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="encaixeEndereco" class="block text-sm font-medium text-gray-700">Endereço:</label>
+                                <input type="text" id="encaixeEndereco" placeholder="Endereço completo do cliente" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="encaixeCluster" class="block text-sm font-medium text-gray-700">Cluster:</label>
+                                    <input type="text" id="encaixeCluster" placeholder="Preenchido automaticamente" class="mt-1 w-full p-2 border border-gray-300 rounded-md bg-gray-50" readonly>
+                                </div>
+                                <div>
+                                    <label for="encaixeSubterritorio" class="block text-sm font-medium text-gray-700">Subterritório:</label>
+                                    <input type="text" id="encaixeSubterritorio" placeholder="Preenchido automaticamente" class="mt-1 w-full p-2 border border-gray-300 rounded-md bg-gray-50" readonly>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="encaixeData" class="block text-sm font-medium text-gray-700">Data do Encaixe:</label>
+                                    <input type="date" id="encaixeData" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <div>
+                                    <label for="encaixePeriodo" class="block text-sm font-medium text-gray-700">Período:</label>
+                                    <select id="encaixePeriodo" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                        <option value="">Selecione...</option>
+                                        <option value="Manhã">Manhã (07:00 às 13:00)</option>
+                                        <option value="Tarde">Tarde (13:00 às 19:00)</option>
+                                        <option value="Noite">Noite (19:00 às 22:00)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="encaixeContato" class="block text-sm font-medium text-gray-700">Contato:</label>
+                                <input type="text" id="encaixeContato" placeholder="Telefone principal para contato" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="encaixeMotivo" class="block text-sm font-medium text-gray-700">Motivo:</label>
+                                <textarea id="encaixeMotivo" rows="3" placeholder="Descreva o motivo da urgência/solicitação de encaixe" class="mt-1 w-full p-2 border border-gray-300 rounded-md"></textarea>
+                            </div>
+                        </div>
+                        <div id="horario-info" class="hidden mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 text-xs">
+                            <p class="font-bold">Horário de Atendimento do Campo:</p>
+                            <p id="horario-texto"></p>
+                        </div>
+                        <button onclick="copyEncaixeRequest()" class="mt-4 bg-red-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition duration-300 w-full sm:w-auto">Copiar Solicitação de Encaixe</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Oferecer Períodos para uma Data</h3>
+                        <div class="bg-sky-50 border-l-4 border-sky-400 p-3 rounded-md">
+                            <label for="offerDate" class="block text-sm font-medium text-gray-700 mb-1">1. Selecione a data para oferecer ao cliente:</label>
+                            <input type="date" id="offerDate" class="w-full sm:w-auto p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                            <p class="text-xs text-gray-500 mt-1">A data selecionada será incluída na mensagem de oferta.</p>
+                        </div>
+                        
+                        <p class="text-sm font-medium text-gray-700 mt-4 mb-2">2. Copie a oferta para o período desejado:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Manhã</p>
+                                <p class="text-xs text-gray-500 mb-2">(07:00 às 13:00)</p>
+                                <pre id="msgOfferManha" class="hidden">Para a data de [Data], temos disponibilidade no período da MANHÃ (entre 07:00 e 13:00). Fica bom para você neste horário?</pre>
+                                <button onclick="copyOfferPeriod('msgOfferManha', this)" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-700 text-sm w-full">Copiar Oferta Manhã</button>
+                            </div>
+                        
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Tarde</p>
+                                <p class="text-xs text-gray-500 mb-2">(13:00 às 19:00)</p>
+                                <pre id="msgOfferTarde" class="hidden">Para a data de [Data], temos disponibilidade no período da TARDE (entre 13:00 e 19:00). Fica bom para você neste horário?</pre>
+                                <button onclick="copyOfferPeriod('msgOfferTarde', this)" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-700 text-sm w-full">Copiar Oferta Tarde</button>
+                            </div>
+                        
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Noite</p>
+                                <p class="text-xs text-gray-500 mb-2">(19:00 às 22:00)</p>
+                                <pre id="msgOfferNoite" class="hidden">Para a data de [Data], temos disponibilidade no período da NOITE (entre 19:00 e 22:00). Fica bom para você neste horário?</pre>
+                                <button onclick="copyOfferPeriod('msgOfferNoite', this)" class="bg-sky-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-700 text-sm w-full">Copiar Oferta Noite</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Agendamento de Visita Técnica (Confirmação)</h3>
+                        <div class="bg-amber-50 border-l-4 border-amber-400 p-3 rounded-md">
+                            <label for="visitDate" class="block text-sm font-medium text-gray-700 mb-1">1. Selecione a data FINAL da visita:</label>
+                            <input type="date" id="visitDate" class="w-full sm:w-auto p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                            <p class="text-xs text-gray-500 mt-1">A data selecionada será incluída na mensagem copiada.</p>
+                        </div>
+
+                        <p class="text-sm font-medium text-gray-700 mt-4 mb-2">2. Copie a mensagem para o período desejado:</p>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Manhã</p>
+                                <p class="text-xs text-gray-500 mb-2">(07:00 às 13:00)</p>
+                                <pre id="msgManha" class="hidden">Confirmado! Seu agendamento foi realizado para a data de [Data do Agendamento], no período da MANHÃ (entre 07:00 e 13:00). Lembramos que é necessária a presença de uma pessoa maior de 18 anos no local para acompanhar a visita.</pre>
+                                <button onclick="copySchedule('msgManha', this)" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 text-sm w-full">Copiar Manhã</button>
+                            </div>
+                        
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Tarde</p>
+                                <p class="text-xs text-gray-500 mb-2">(13:00 às 19:00)</p>
+                                <pre id="msgTarde" class="hidden">Confirmado! Seu agendamento foi realizado para a data de [Data do Agendamento], no período da TARDE (entre 13:00 e 19:00). Lembramos que é necessária a presença de uma pessoa maior de 18 anos no local para acompanhar a visita.</pre>
+                                <button onclick="copySchedule('msgTarde', this)" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 text-sm w-full">Copiar Tarde</button>
+                            </div>
+                        
+                             <div class="p-3 border rounded-lg">
+                                <p class="font-semibold text-gray-700">Noite</p>
+                                <p class="text-xs text-gray-500 mb-2">(19:00 às 22:00)</p>
+                                <pre id="msgNoite" class="hidden">Confirmado! Seu agendamento foi realizado para a data de [Data do Agendamento], no período da NOITE (entre 19:00 e 22:00). Lembramos que é necessária a presença de uma pessoa maior de 18 anos no local para acompanhar a visita.</pre>
+                                <button onclick="copySchedule('msgNoite', this)" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 text-sm w-full">Copiar Noite</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Resumo do Agendamento para Cliente</h3>
+                        <div class="space-y-3">
+                            <div>
+                                <label for="resumoNome" class="block text-sm font-medium text-gray-700">Nome do Cliente:</label>
+                                <input type="text" id="resumoNome" placeholder="Nome completo do cliente" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="resumoEndereco" class="block text-sm font-medium text-gray-700">Endereço do agendamento:</label>
+                                <input type="text" id="resumoEndereco" placeholder="Endereço completo" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div>
+                                <label for="resumoContato" class="block text-sm font-medium text-gray-700">Telefone para contato:</label>
+                                <input type="text" id="resumoContato" placeholder="(XX) XXXXX-XXXX" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="resumoData" class="block text-sm font-medium text-gray-700">Data do agendamento:</label>
+                                    <input type="text" id="resumoData" placeholder="DD/MM/AAAA" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                </div>
+                                <div>
+                                    <label for="resumoHorario" class="block text-sm font-medium text-gray-700">Horário do agendamento:</label>
+                                    <input type="text" id="resumoHorario" placeholder="Ex: Manhã (07:00 às 13:00)" class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="resumoReferencia" class="block text-sm font-medium text-gray-700">Ponto de referência:</label>
+                                <input type="text" id="resumoReferencia" placeholder="Próximo a..." class="mt-1 w-full p-2 border border-gray-300 rounded-md">
+                            </div>
+                        </div>
+                        <button onclick="copyResumoAgendamento()" class="mt-4 bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 w-full sm:w-auto">Copiar Resumo e Limpar</button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Encerramento com Solução</h3>
+                        <pre id="msg12" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Que ótimo! 😄 Fico feliz em saber que sua conexão foi normalizada. Posso te ajudar em algo mais?</pre>
+                        <button onclick="copyText('msg12', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem</button>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Encerramento Final com Pesquisa</h3>
+                        
+                        <div class="mb-3">
+                            <label for="protocoloInput" class="block text-sm font-medium text-gray-700 mb-1">Protocolo do Atendimento:</label>
+                            <input type="text" id="protocoloInput" placeholder="Insira o nº do protocolo aqui" class="w-full sm:w-2/3 p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 transition">
+                        </div>
+
+                        <pre id="msg13" class="bg-gray-50 text-gray-700 p-3 rounded-md whitespace-pre-wrap text-sm leading-relaxed">Agradeço por seu contato! Peço um favor muito especial: ao final do nosso chat, você receberá uma pesquisa para avaliar o **meu atendimento**. Sua opinião é fundamental para o meu desenvolvimento profissional. ⭐
+
+A Desktop fica à sua disposição. Tenha uma excelente noite!
+
+Protocolo: [Nº do Protocolo]</pre>
+                        <button onclick="copyFinalMessageWithProtocol('msg13', this)" class="mt-3 bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 w-full sm:w-auto">Copiar Mensagem Final</button>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div>
+                <h2 class="text-2xl font-bold text-gray-700 border-b-2 border-blue-200 pb-2 mb-4">📝 Tabulação / Notas Internas</h2>
+                <div class="space-y-4">
+                    <div class="bg-white p-4 rounded-lg shadow-md border border-gray-200">
+                        <h3 class="font-semibold text-gray-800 mb-2">Modelo de Tabulação para Sistema</h3>
+                        <p class="text-sm text-gray-600 mb-3">Preencha os campos abaixo usando os botões de atalho ou digitando manualmente. Depois, copie o texto final.</p>
+                        <textarea id="tabulacaoTexto" class="w-full p-3 border border-gray-300 rounded-md h-80 text-sm font-mono" spellcheck="false">Contato Via: [Origem Contato]
+[Dynamic Intro Sentence]
+
+Problema Relatado: [Problema Relatado]
+Solicitação do Cliente: [Solicitação Cliente]
+
+Testes Realizados:
+- Verificação de LEDs: [Status LEDs]
+- Reforço de Sinal (Power Cycle): [Power Cycle]
+- Verificação de Cabos: [Cabos]
+- Teste de Velocidade: [Teste Velocidade]
+
+Diagnóstico:
+- [Diagnóstico]
+
+Solução Aplicada / Encaminhamento:
+- [Solução]
+
+Resultado:
+- [Resultado]
+</textarea>
+
+                        <div class="mt-4 space-y-3">
+                            <div>
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Origem do Contato:</p>
+                                <div class="flex flex-wrap gap-2" data-group-type="single">
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Origem Contato" data-value="URA (Atendimento Eletrônico)" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">URA</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Origem Contato" data-value="Chat (Atendimento Humano)" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Chat</button>
+                                </div>
+                            </div>
+                            <div id="problema-relatado-group">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Problema Relatado:</p>
+                                <div class="flex flex-wrap gap-2" data-group-type="single">
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Problema Relatado" data-value="Lentidão na conexão" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Lentidão</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Problema Relatado" data-value="Sem conexão / Internet não funciona" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Sem Conexão</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Problema Relatado" data-value="Quedas constantes de sinal" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Quedas Constantes</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Problema Relatado" data-value="Problemas apenas no Wi-Fi" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Wi-Fi Ruim</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Problema Relatado" data-value="Instabilidade Massiva na região" data-massivo-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Instabilidade Massiva</button>
+                                </div>
+                            </div>
+                            <div id="solicitacao-cliente-group">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Solicitação do Cliente:</p>
+                                <div class="flex flex-wrap gap-2" data-group-type="single">
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Solicitação Cliente" data-value="Segunda via de boleto" data-solicitacao-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">2ª Via Boleto</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Solicitação Cliente" data-value="Desbloqueio em confiança" data-solicitacao-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Desbloqueio Confiança</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Solicitação Cliente" data-value="Troca de senha de Wi-Fi" data-solicitacao-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Troca Senha Wi-Fi</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Solicitação Cliente" data-value="Troca de data de vencimento" data-solicitacao-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Troca Vencimento</button>
+                                </div>
+                                <div id="vencimento-date-picker" class="hidden mt-3">
+                                    <label for="newDueDate" class="block text-sm font-medium text-gray-700 mb-1">Novo Dia de Vencimento:</label>
+                                    <select id="newDueDate" class="w-full sm:w-auto p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500">
+                                        <option value="">Selecione o dia</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="20">20</option>
+                                        <option value="25">25</option>
+                                    </select>
+                                </div>
+                            </div>
+                             <div id="procedimentos-testes" data-group-type="multi">
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Procedimentos e Testes:</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Status LEDs" data-value="PON/LOS/FIBRA/INTERNET Vermelho" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Verificação de LEDs</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Power Cycle" data-value="Reforço de Sinal (Power Cycle) realizado" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Power Cycle</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Cabos" data-value="Verificação de cabos realizada pelo cliente" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Cabos: OK</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Power Cycle" data-value="Reboot remoto aplicado" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Reboot Remoto</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Power Cycle" data-value="Provisionamento refeito" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Provisionamento</button>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-700 mb-2">Resultado:</p>
+                                <div class="flex flex-wrap gap-2" data-group-type="single">
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Conexão normalizada após procedimentos" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Normalizado</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Problema não resolvido, cliente ciente da visita" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Não Resolvido / Visita</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Cliente orientado sobre instabilidade (retorno 12h)" data-massivo-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Instabilidade (12h)</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Cliente orientado sobre instabilidade (retorno 24h)" data-massivo-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Instabilidade (24h)</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Cliente orientado" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Cliente Orientado</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Solicitação atendida" data-solicitacao-trigger="true" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Solicitação Atendida</button>
+                                    <button onclick="toggleTabulationButton(this)" data-placeholder="Resultado" data-value="Cliente ciente dos procedimentos e irá observar a conexão" class="tab-button bg-gray-200 text-gray-800 text-xs font-semibold py-1 px-3 rounded-full hover:bg-gray-300">Cliente irá Observar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="copyFromTextarea('tabulacaoTexto', this)" class="mt-4 bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300 w-full sm:w-auto">Copiar Tabulação Final</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <footer class="text-center py-4">
+        <p class="text-xs text-gray-500">Desenvolvido por Henrique Mota</p>
+    </footer>
+
+    <div id="copyFeedback" class="fixed top-5 right-5 bg-green-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg" style="display: none;">
+        Copiado!
+    </div>
+
+    <script src="script.js?v=202510251610"></script> 
+
+</body>
+</html>
